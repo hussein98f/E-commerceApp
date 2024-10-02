@@ -1,21 +1,21 @@
 import { Outlet } from "react-router-dom";
 import { Footer, Header } from "../../common";
-
+import { Container } from "@chakra-ui/react";
 // interface IProps {}
 // {}: IProps
 
 const Main = () => {
   return (
     <>
-      <header>
+      <Container as={"header"} px={0} maxW={1200}>
         <Header />
-      </header>
-      <main>
+      </Container>
+      <Container as={"main"} px={0} py={5} maxW={1200}>
         <Outlet />
-      </main>
-      <footer>
+      </Container>
+      <Container as={"footer"} px={0} maxW={1200}>
         <Footer />
-      </footer>
+      </Container>
     </>
   );
 };
