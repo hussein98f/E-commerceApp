@@ -8,21 +8,27 @@ import {
   Button,
   Box,
   Text,
+  Tag,
+  TagLeftIcon,
+  TagLabel,
 } from "@chakra-ui/react";
 // import { Link } from "react-router-dom";
 import { IoIosStar } from "react-icons/io";
 import { MdPhotoLibrary } from "react-icons/md";
 import { IconButton } from "@chakra-ui/react";
 import { FaRegHeart } from "react-icons/fa";
+import { IProduct } from "../interfaces";
 
-// interface IProps {}
+interface IProps {
+  data: IProduct;
+}
 
-const ProductsCard = () => {
+const ProductsCard = ({ data }: IProps) => {
   return (
     <Card borderRadius="md" maxW="sm">
       <CardBody p={2.5}>
         <Image
-          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+          src={`${import.meta.env.BASE_URL}${data?.Thumbnail.url}`}
           alt="Green double couch with wooden legs"
           borderRadius="md"
           position="relative"
@@ -30,9 +36,9 @@ const ProductsCard = () => {
         <IconButton
           isRound={true}
           variant="solid"
-          colorScheme="red"
+          colorScheme="blue"
           aria-label="favorite"
-          fontSize="15px"
+          fontSize="14px"
           position="absolute"
           top={2.5}
           m={0.5}
@@ -42,18 +48,14 @@ const ProductsCard = () => {
           icon={<FaRegHeart />}
         />
         <Stack spacing="1" pt={1}>
-          <Box display="inline">
+          <Box overflow="hidden" noOfLines={2}>
             <Text as="span" fontSize="0.8em" fontWeight={600} me={1}>
               جديد
             </Text>
             <Heading as="h3" display="inline" fontSize="0.8em" fontWeight={300}>
-              هذا النص هو مثال لنص يمكن هذا النص هو مثال لنص يمكن
+              هذا النصالنصالنص هو مثال لنص يمكن هذا النص هو مثال لنص يمكن
             </Heading>
           </Box>
-          <Text fontWeight={200} fontSize="0.76em" textAlign="justify">
-            هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
-            النص من ...
-          </Text>
           <Box display="flex" mt="1" alignItems="center">
             <Box as="span" me={1.5} fontSize="sm">
               4.4
@@ -71,11 +73,31 @@ const ProductsCard = () => {
             </Text>
             <MdPhotoLibrary size="14px" />
           </Box>
-          <Box mt={2} mb={1} display="flex" alignItems="center" gap={1.5}>
-            <Text fontSize="sm">250.20</Text>
+          <Box mt={1.5} mb={1.5} display="flex" alignItems="center" gap={1.5}>
+            <Text fontSize={15}>250.20</Text>
             <Text as="span" fontSize="0.8em" fontWeight={400} me={1}>
               ل.س
             </Text>
+          </Box>
+          <Box flexWrap="wrap" display="flex" alignItems="center" gap={1}>
+            <Tag size="sm" rounded="sm" variant="subtle" colorScheme="orange">
+              <TagLeftIcon m={1} boxSize="11px" as={FaRegHeart} />
+              <TagLabel noOfLines={2} fontWeight={300} fontSize={12}>
+                تنزيلات 50%
+              </TagLabel>
+            </Tag>
+            <Tag size="sm" rounded="sm" variant="subtle" colorScheme="blue">
+              <TagLeftIcon m={1} boxSize="11px" as={FaRegHeart} />
+              <TagLabel fontWeight={300} fontSize={12}>
+                منتج متميز
+              </TagLabel>
+            </Tag>
+            <Tag size="sm" rounded="sm" variant="subtle" colorScheme="red">
+              <TagLeftIcon m={1} boxSize="11px" as={FaRegHeart} />
+              <TagLabel fontWeight={300} fontSize={12}>
+                يباع بكثرة
+              </TagLabel>
+            </Tag>
           </Box>
         </Stack>
       </CardBody>

@@ -7,23 +7,27 @@ import {
   Box,
   Flex,
   Button,
+  useColorMode,
 } from "@chakra-ui/react";
 import { IoArrowUndoOutline } from "react-icons/io5";
 import { BsPatchCheck } from "react-icons/bs";
 
 const ProductsPage = () => {
+  const { colorMode } = useColorMode();
   return (
     <Container
       borderRadius="md"
       maxW="full"
       background={
-        "linear-gradient(186deg, #4158D0 2%, #C850C0 15%, #FFCC70 30%,  transparent 50%),linear-gradient(180deg, #C850C9 20%, #1a202c 60%)"
+        colorMode === "dark"
+          ? "linear-gradient(186deg, #4158D0 2%, #C850C0 15%, #cd942e 30%,  transparent 50%),linear-gradient(180deg, #C850C9 20%, #1a202c 60%)"
+          : "linear-gradient(186deg, #4158D0 2%, #C850C0 15%, #cd942e 30%,  transparent 50%),linear-gradient(180deg, #C850C9 20%, #fff 60%)"
       }
     >
-      <Flex py={3} px={2}>
-        <Box display="flex" alignItems="center" gap={2}>
+      <Flex py={4} px={2}>
+        <Box display="flex" alignItems="center" gap={2} color="white">
           <BsPatchCheck size="23px" />
-          <Heading as="h2" fontWeight={500} size="md">
+          <Heading as="h2" fontWeight={400} size="md">
             المنتجات المميزة
           </Heading>
         </Box>
@@ -31,12 +35,14 @@ const ProductsPage = () => {
         <Box>
           <Button
             rightIcon={<IoArrowUndoOutline size="19px" />}
-            variant="outline"
-            size="md"
+            variant="ghost"
+            size="sm"
             fontSize="sm"
             fontWeight={400}
+            color="white"
+            _hover={{ bg: "#fffff929" }}
           >
-            عرض المزيد من المنتجات
+            كل المنتجات
           </Button>
         </Box>
       </Flex>
