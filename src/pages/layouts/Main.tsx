@@ -7,7 +7,7 @@ import { Container } from "@chakra-ui/react";
 const Main = () => {
   return (
     <>
-      <Container as={"header"} px={0} maxW={1200}>
+      <Container as={"header"} px={0} minW="full">
         <Header />
       </Container>
       <Container as={"main"} px={0} py={5} maxW={1200}>

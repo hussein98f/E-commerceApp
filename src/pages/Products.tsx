@@ -11,9 +11,25 @@ import {
 } from "@chakra-ui/react";
 import { IoArrowUndoOutline } from "react-icons/io5";
 import { BsPatchCheck } from "react-icons/bs";
+import axiosInstance from "../config/axios.config";
+import { useQuery } from "@tanstack/react-query";
+import { IProduct } from "../interfaces";
+import ProductCardSkeleton from "../components/ProductCardSkeleton";
+import Crdata from "../../../../backEnd/Crdata";
 
 const ProductsPage = () => {
   const { colorMode } = useColorMode();
+
+  const { isLoading, data } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const { data } = await axiosInstance.get(
+        "/products?populate=categories&populate=Thumbnail"
+      );
+      return data;
+    },
+  });
+
   return (
     <Container
       borderRadius="md"
@@ -47,11 +63,13 @@ const ProductsPage = () => {
         </Box>
       </Flex>
       <Grid templateColumns="repeat(auto-fill,minmax(200px, 1fr))" gap={4}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {isLoading
+          ? Array.from({ length: 5 }, (_, idx) => (
+              <ProductCardSkeleton key={idx} />
+            ))
+          : data.data.map((product: IProduct) => (
+              <ProductCard key={product.id} data={product} />
+            ))}
       </Grid>
     </Container>
   );

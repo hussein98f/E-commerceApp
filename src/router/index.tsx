@@ -6,14 +6,16 @@ import {
 
 import { HomePage, AboutPage, ProductsPage, ProductPage } from "../pages";
 import { Main } from "../pages/layouts";
+import Login from "../pages/Login";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Main />}>
       <Route index element={<HomePage />} />
       <Route path="products" element={<ProductsPage />} />
-      {/* <Route path="product/" element={<ProductPage />} /> */}
+      <Route path="product/:id" element={<ProductPage />} />
       <Route path="about" element={<AboutPage />} />
+      <Route path="login" element={<Login />} />
     </Route>
   )
 );

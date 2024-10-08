@@ -6,7 +6,7 @@ import { BsMoonStars } from "react-icons/bs";
 const ColorSwitcher = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Button onClick={toggleColorMode}>
+    <Button size="sm" onClick={toggleColorMode}>
       {colorMode === "dark" ? <RxSun /> : <BsMoonStars />}
     </Button>
   );
