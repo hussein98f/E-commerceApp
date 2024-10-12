@@ -19,8 +19,11 @@ import { MdLocalShipping } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../config/axios.config";
 import { IProduct } from "../interfaces";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../app/features/shop/cartSlice";
 
 const ProductPage = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   const { isLoading, data } = useQuery({
@@ -29,11 +32,12 @@ const ProductPage = () => {
       const { data } = await axiosInstance.get(
         `/products/${id}?populate=categories&populate=Thumbnail`
       );
-      console.log(data);
       return data;
     },
   });
-
+  const addItemToCart = () => {
+    dispatch(addToCart(data?.data));
+  };
   return (
     <Container maxW={"7xl"}>
       <SimpleGrid
@@ -101,7 +105,7 @@ const ProductPage = () => {
                   <ListItem> {data?.data.Stock}</ListItem>
                   <ListItem> {data?.data.weight}</ListItem>
                   {data?.data.categories?.map((item) => (
-                    <ListItem> {item.Name}</ListItem>
+                    <ListItem key={item.id}> {item.Name}</ListItem>
                   ))}
                 </List>
               </SimpleGrid>
@@ -121,6 +125,7 @@ const ProductPage = () => {
               transform: "translateY(2px)",
               boxShadow: "lg",
             }}
+            onClick={addItemToCart}
           >
             Add to cart
           </Button>

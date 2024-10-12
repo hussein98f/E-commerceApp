@@ -5,18 +5,30 @@ import {
 } from "react-router-dom";
 
 import { HomePage, AboutPage, ProductsPage, ProductPage } from "../pages";
-import { Main } from "../pages/layouts";
+import { Admin, Main } from "../pages/layouts";
 import Login from "../pages/Login";
+import CookiesService from "../services/Cookie";
+import AdminDashboard from "../pages/dashboard";
+import ProductList from "../pages/dashboard/ProductList";
 
+const token = CookiesService.get("jwt");
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Main />}>
-      <Route index element={<HomePage />} />
-      <Route path="products" element={<ProductsPage />} />
-      <Route path="product/:id" element={<ProductPage />} />
-      <Route path="about" element={<AboutPage />} />
-      <Route path="login" element={<Login />} />
-    </Route>
+    <>
+      <Route path="/" element={<Main />}>
+        <Route index element={<HomePage />} />
+        <Route path="products" element={<ProductsPage />} />
+        <Route path="product/:id" element={<ProductPage />} />
+        <Route path="about" element={<AboutPage />} />
+      </Route>
+
+      <Route path="login" element={<Login isAuth={token} />} />
+
+      <Route path="/dashboard" element={<Admin />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="products" element={<ProductList />} />
+      </Route>
+    </>
   )
 );
 

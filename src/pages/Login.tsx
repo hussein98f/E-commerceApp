@@ -17,10 +17,13 @@ import { useState } from "react";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectLogin, userLogin } from "../app/features/auth/loginSlice";
+import { Navigate } from "react-router-dom";
 
 // interface IProps {}
 
-const Login = () => {
+const Login = ({ isAuth }) => {
+  if (isAuth) return <Navigate to={"/"} replace />;
+
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const loginLoading = useAppSelector(selectLogin);
@@ -32,13 +35,13 @@ const Login = () => {
     password: "",
   });
 
-  const formSubmit = (e) => {
+  const formSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(userLogin(inputs));
   };
 
-  const inputsHandler = (e) => {
+  const inputsHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputs({ ...inputs, [name]: value });
   };

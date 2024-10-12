@@ -29,9 +29,23 @@ import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 import ColorSwitcher from "../components/ui/ColorSwitcher";
 import far4logo from "../assets/far4logo.svg";
 import { Link } from "react-router-dom";
+import CookiesService from "../services/Cookie";
+import { FaOpencart } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { selectCart } from "../app/features/shop/cartSlice";
+import { onOpenCartDrawer } from "../app/features/globalSlice";
+import { useAppDispatch } from "../app/hooks";
 
 export default function Header() {
+  const dispatch = useAppDispatch();
+  const { product } = useSelector(selectCart);
   const { isOpen, onToggle } = useDisclosure();
+  const token = CookiesService.get("jwt");
+  const onLogout = () => {
+    CookiesService.remove("jwt");
+    window.location.reload();
+  };
+  const onCartOpen = () => dispatch(onOpenCartDrawer());
 
   return (
     <Box
@@ -84,64 +98,83 @@ export default function Header() {
           spacing={3}
         >
           <Button
-            size={"sm"}
-            as={Link}
-            fontSize={"sm"}
+            size="sm"
+            alignItems={"center"}
+            display={"flex"}
+            gap={2}
+            onClick={onCartOpen}
+            fontSize={16}
             fontWeight={300}
-            variant={"link"}
-            to={"/login"}
           >
-            Sign In
+            Cart ({product.length})
+            <FaOpencart size={18} />
           </Button>
-          <Button
-            size={"sm"}
-            as={Link}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={400}
-            color={"white"}
-            bg={"pink.400"}
-            to={"#"}
-            _hover={{
-              bg: "pink.300",
-            }}
-          >
-            Sign Up
-          </Button>
-          <ColorSwitcher />
-          <Menu>
-            <MenuButton
-              ms={1}
-              as={Button}
-              rounded={"full"}
-              variant={"link"}
-              cursor={"pointer"}
-              minW={0}
-            >
-              <Avatar
+          {!token && (
+            <>
+              <Button
                 size={"sm"}
-                src={"https://avatars.dicebear.com/api/male/username.svg"}
-              />
-            </MenuButton>
-            <MenuList alignItems={"center"}>
-              <br />
-              <Center>
+                as={Link}
+                fontSize={"sm"}
+                fontWeight={300}
+                variant={"link"}
+                to={"/login"}
+              >
+                Sign In
+              </Button>
+              <Button
+                size={"sm"}
+                as={Link}
+                display={{ base: "none", md: "inline-flex" }}
+                fontSize={"sm"}
+                fontWeight={400}
+                color={"white"}
+                bg={"pink.400"}
+                to={"#"}
+                _hover={{
+                  bg: "pink.300",
+                }}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
+          <ColorSwitcher />
+
+          {token && (
+            <Menu>
+              <MenuButton
+                ms={1}
+                as={Button}
+                rounded={"full"}
+                variant={"link"}
+                cursor={"pointer"}
+                minW={0}
+              >
                 <Avatar
-                  size={"2xl"}
+                  size={"sm"}
                   src={"https://avatars.dicebear.com/api/male/username.svg"}
                 />
-              </Center>
-              <br />
-              <Center>
-                <p>Username</p>
-              </Center>
-              <br />
-              <MenuDivider />
-              <MenuItem>Your Servers</MenuItem>
-              <MenuItem>Account Settings</MenuItem>
-              <MenuItem>Logout</MenuItem>
-            </MenuList>
-          </Menu>
+              </MenuButton>
+              <MenuList alignItems={"center"}>
+                <br />
+                <Center>
+                  <Avatar
+                    size={"2xl"}
+                    src={"https://avatars.dicebear.com/api/male/username.svg"}
+                  />
+                </Center>
+                <br />
+                <Center>
+                  <p>Username</p>
+                </Center>
+                <br />
+                <MenuDivider />
+                <MenuItem>Your Servers</MenuItem>
+                <MenuItem>Account Settings</MenuItem>
+                <MenuItem onClick={onLogout}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+          )}
         </Stack>
       </Flex>
 

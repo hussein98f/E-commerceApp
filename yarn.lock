@@ -743,6 +743,11 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
+"@types/cookie@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.6.0.tgz#eac397f28bf1d6ae0ae081363eca2f425bedf0d5"
+  integrity sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==
+
 "@types/estree@1.0.6", "@types/estree@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.6.tgz#628effeeae2064a1b4e79f78e81d87b7e5fc7b50"
@@ -1092,6 +1097,11 @@ convert-source-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-2.0.0.tgz#4b560f649fc4e918dd0ab75cf4961e8bc882d82a"
   integrity sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==
+
+cookie@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.6.0.tgz#2798b04b071b0ecbff0dbb62a505a8efa4e19051"
+  integrity sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==
 
 copy-to-clipboard@3.3.3:
   version "3.3.3"
@@ -1970,6 +1980,11 @@ react@^18.3.1:
   dependencies:
     loose-envify "^1.1.0"
 
+redux-persist@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
+  integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
+
 redux-thunk@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-3.1.0.tgz#94aa6e04977c30e14e892eae84978c1af6058ff3"
@@ -2178,6 +2193,14 @@ typescript@^5.5.3:
   version "5.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.6.2.tgz#d1de67b6bef77c41823f822df8f0b3bcff60a5a0"
   integrity sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==
+
+universal-cookie@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/universal-cookie/-/universal-cookie-7.2.0.tgz#1f3fa9c575d863ac41b4e42272d240ae2d32c047"
+  integrity sha512-PvcyflJAYACJKr28HABxkGemML5vafHmiL4ICe3e+BEKXRMt0GaFLZhAwgv637kFFnnfiSJ8e6jknrKkMrU+PQ==
+  dependencies:
+    "@types/cookie" "^0.6.0"
+    cookie "^0.6.0"
 
 update-browserslist-db@^1.1.0:
   version "1.1.1"

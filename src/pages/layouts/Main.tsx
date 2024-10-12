@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Footer, Header } from "../../common";
 import { Container } from "@chakra-ui/react";
+import CartDrawer from "../../common/CartDrawer";
 // interface IProps {}
 // {}: IProps
 
@@ -16,6 +17,7 @@ const Main = () => {
       <Container as={"footer"} px={0} maxW={1200}>
         <Footer />
       </Container>
+      <CartDrawer />
     </>
   );
 };
